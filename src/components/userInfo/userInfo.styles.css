@@ -1,0 +1,33 @@
+.user-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.user-card h2{
+    margin-top: 0;
+}
+
+.user-card p {
+    margin: 0;
+}
+
+.address {
+    margin-bottom: 20px;
+}
+
+.company{
+    margin-top: 10px;
+}
+
+.website{
+    margin-top: 10px;
+}
+
+.phone{
+    margin-top: 10px;
+}
+
+.email{
+    margin-top: 10px;
+}

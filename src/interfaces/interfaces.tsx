@@ -2,13 +2,18 @@ export interface AutocompleteProps {
 	data: AutoCompleteUser[];
 }
 
+export interface UserProps {
+	user: AutoCompleteUser;
+}
+
 export interface SuggestionProps {
 	suggestions: AutoCompleteUser[];
 	inputValue: string;
+	showUserInfo: (id: string) => void;
 }
 
 export interface AutoCompleteUser {
-	id: number;
+	id: string;
 	name: string;
 	username: string;
 	email: string;

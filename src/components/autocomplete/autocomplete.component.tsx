@@ -5,12 +5,38 @@ import {
 	AutocompleteProps,
 } from "../../interfaces/interfaces";
 import SuggestionsComponent from "../suggestions/suggestions.component";
+import UserInfo from "../userInfo/userInfo.component";
 
 import "./autocomplete.styles.css";
+
+const mokUser = {
+	id: "0",
+	name: "",
+	username: "",
+	email: "",
+	address: {
+		street: "--",
+		suite: "--",
+		city: "--",
+		zipcode: "--",
+		geo: {
+			lat: "",
+			lng: "",
+		},
+	},
+	phone: "",
+	website: "",
+	company: {
+		name: "",
+		catchPhrase: "",
+		bs: "",
+	},
+};
 
 const Autocomplete: React.FC<AutocompleteProps> = ({ data }) => {
 	const [inputValue, setInputValue] = useState("");
 	const [suggestions, setSuggestions] = useState<AutoCompleteUser[]>([]);
+	const [selectedUser, setSelectedUser] = useState<AutoCompleteUser>(mokUser);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -35,6 +61,11 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ data }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inputValue]);
 
+	const showUserInfo = (id: string) => {
+		const userData = data.find((item) => String(item.id) === id)!;
+		setSelectedUser(userData);
+	};
+
 	const renderSuggestions = () => {
 		if (loading) {
 			return <div>Loading...</div>;
@@ -43,7 +74,11 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ data }) => {
 			return <div>No suggestions found</div>;
 		}
 		return (
-			<SuggestionsComponent suggestions={suggestions} inputValue={inputValue} />
+			<SuggestionsComponent
+				suggestions={suggestions}
+				inputValue={inputValue}
+				showUserInfo={showUserInfo}
+			/>
 		);
 	};
 
@@ -62,7 +97,10 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ data }) => {
 					placeholder="Search"
 				/>
 			</div>
-			{renderSuggestions()}
+			<div className="users-block">
+				<div className="users-suggestions">{renderSuggestions()}</div>
+				<div>{selectedUser.id !== "0" && <UserInfo user={selectedUser} />}</div>
+			</div>
 		</div>
 	);
 };

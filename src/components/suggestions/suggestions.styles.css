@@ -1,5 +1,10 @@
 .suggestion {
-    padding: 10px 0;   
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background-color: #CDCDCD;
 }
 
 strong {

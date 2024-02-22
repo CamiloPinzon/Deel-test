@@ -7,6 +7,7 @@ import "./suggestions.styles.css";
 const SuggestionsComponent: React.FC<SuggestionProps> = ({
 	suggestions,
 	inputValue,
+	showUserInfo,
 }) => {
 	const highlightText = (text: string) => {
 		const index = text.toLowerCase().indexOf(inputValue.toLowerCase());
@@ -28,7 +29,11 @@ const SuggestionsComponent: React.FC<SuggestionProps> = ({
 	return (
 		<div>
 			{suggestions.map((suggestion) => (
-				<div className="suggestion" key={suggestion.id}>
+				<div
+					className="suggestion"
+					key={suggestion.id}
+					onClick={() => showUserInfo(String(suggestion.id))}
+				>
 					{highlightText(suggestion.name)}
 				</div>
 			))}
